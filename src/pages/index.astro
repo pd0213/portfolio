@@ -4,25 +4,40 @@ import { getCollection } from 'astro:content';
 const works3d = await getCollection('3d').catch(() => []);
 const works2d = await getCollection('2d').catch(() => []);
 ---
-
 <Layout>
   <main class="min-h-screen bg-pink-50 font-sans">
-    <header class="bg-white border-b border-pink-100 py-8 text-center">
-      <h1 class="text-3xl font-bold tracking-widest text-pink-400">PORTFOLIO</h1>
-      <p class="text-sm text-cyan-400 mt-1 tracking-wider">works by pd0213</p>
+    <header class="bg-white border-b border-pink-100 py-6 px-8">
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div class="text-center flex-1">
+          <h1 class="text-2xl font-bold tracking-[0.3em] text-pink-400">PORTFOLIO</h1>
+          <p class="text-xs text-cyan-400 mt-1 tracking-widest">works by pd0213</p>
+        </div>
+        <div class="flex gap-4 items-center">
+          <a href="https://x.com/McDonalds" target="_blank" rel="noopener" class="text-pink-300 hover:text-pink-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="https://booth.pm" target="_blank" rel="noopener" class="text-pink-300 hover:text-pink-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
     </header>
     <div class="flex justify-center mt-10 gap-4">
       <button
         id="tab-3d"
         onclick="switchTab('3d')"
-        class="tab-btn px-8 py-2 rounded-full border-2 border-pink-300 text-pink-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-pink-400 hover:text-white"
+        class="px-8 py-2 rounded-full border-2 border-pink-300 text-pink-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-pink-400 hover:text-white"
       >
         3D
       </button>
       <button
         id="tab-2d"
         onclick="switchTab('2d')"
-        class="tab-btn px-8 py-2 rounded-full border-2 border-cyan-300 text-cyan-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-cyan-400 hover:text-white"
+        class="px-8 py-2 rounded-full border-2 border-cyan-300 text-cyan-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-cyan-400 hover:text-white"
       >
         2D
       </button>
@@ -31,33 +46,38 @@ const works2d = await getCollection('2d').catch(() => []);
       {works3d.length === 0 ? (
         <p class="text-center text-pink-300 py-20">まだ作品がありません</p>
       ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {works3d.map((work) => (
-            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
-              <video
-                src={work.data.video}
-                autoplay
-                loop
-                muted
-                playsinline
-                class="w-full aspect-video object-cover"
-              />
-              <div class="p-5">
-                <h2 class="text-lg font-bold text-gray-700 mb-2">{work.data.title}</h2>
-                <p class="text-sm text-gray-400 leading-relaxed">{work.data.description}</p>
-                {work.data.images && work.data.images.length > 0 && (
-                  <div class="mt-4 flex gap-2 flex-wrap">
-                    {work.data.images.map((img, i) => (
+            <div class="flex flex-col gap-2">
+              <div class="relative group overflow-hidden rounded-xl bg-pink-100" style="aspect-ratio: 9/16;">
+                <video
+                  src={work.data.video}
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-pink-900 bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100">
+                  <p class="text-white font-bold text-sm">{work.data.title}</p>
+                  <p class="text-pink-100 text-xs mt-1 line-clamp-2">{work.data.description}</p>
+                </div>
+              </div>
+              {work.data.images && work.data.images.length > 0 && (
+                <div class="grid grid-cols-3 gap-1">
+                  {work.data.images.map((img, i) => (
+                    <div class="relative group overflow-hidden rounded-lg bg-pink-100" style="aspect-ratio: 1/1;">
                       <img
                         src={img}
                         alt={`wireframe-${i}`}
-                        class="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity lightbox-trigger"
+                        class="w-full h-full object-cover cursor-pointer lightbox-trigger"
                         data-src={img}
                       />
-                    ))}
-                  </div>
-                )}
-              </div>
+                      <div class="absolute inset-0 bg-pink-900 bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200" />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -67,17 +87,17 @@ const works2d = await getCollection('2d').catch(() => []);
       {works2d.length === 0 ? (
         <p class="text-center text-cyan-300 py-20">まだ作品がありません</p>
       ) : (
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {works2d.map((work) => (
-            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+            <div class="relative group overflow-hidden rounded-xl break-inside-avoid">
               <img
                 src={work.data.image}
                 alt={work.data.title}
-                class="w-full aspect-square object-cover"
+                class="w-full object-cover"
               />
-              <div class="p-4">
-                <h2 class="text-base font-bold text-gray-700 mb-1">{work.data.title}</h2>
-                <p class="text-sm text-gray-400 leading-relaxed">{work.data.description}</p>
+              <div class="absolute inset-0 bg-pink-900 bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100">
+                <p class="text-white font-bold text-sm">{work.data.title}</p>
+                <p class="text-pink-100 text-xs mt-1 line-clamp-2">{work.data.description}</p>
               </div>
             </div>
           ))}
@@ -86,11 +106,10 @@ const works2d = await getCollection('2d').catch(() => []);
     </section>
     <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
       <button onclick="closeLightbox()" class="absolute top-6 right-8 text-white text-4xl font-light">&times;</button>
-      <img id="lightbox-img" src="" alt="" class="max-w-3xl max-h-screen rounded-xl shadow-2xl p-4" />
+      <img id="lightbox-img" src="" alt="" class="max-h-screen max-w-3xl rounded-xl shadow-2xl p-4" />
     </div>
   </main>
 </Layout>
-
 <script is:inline>
   function switchTab(tab) {
     const gallery3d = document.getElementById('gallery-3d');

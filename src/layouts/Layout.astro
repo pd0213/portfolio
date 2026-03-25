@@ -12,16 +12,11 @@ import '../styles/global.css';
   </head>
   <body>
     <slot />
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-      // invite_tokenがURLに含まれていたら/admin/に転送
+    <script is:inline>
       if (window.location.hash.includes('invite_token') ||
-          window.location.hash.includes('recovery_to
+          window.location.hash.includes('recovery_token')) {
+        window.location.href = '/admin/' + window.location.hash;
+      }
+    </script>
+  </body>
+</html>

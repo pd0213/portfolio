@@ -91,7 +91,7 @@ const works2d = await getCollection('2d').catch(() => []);
   </main>
 </Layout>
 
-<script>
+<script is:inline>
   function switchTab(tab) {
     const gallery3d = document.getElementById('gallery-3d');
     const gallery2d = document.getElementById('gallery-2d');
@@ -114,21 +114,21 @@ const works2d = await getCollection('2d').catch(() => []);
     }
   }
   switchTab('3d');
-  document.querySelectorAll('.lightbox-trigger').forEach(img => {
-    img.addEventListener('click', () => {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.lightbox-trigger').forEach(function(img) {
+    img.addEventListener('click', function() {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
       lightboxImg.src = img.dataset.src;
       lightbox.classList.remove('hidden');
       lightbox.classList.add('flex');
     });
   });
   function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
+    var lightbox = document.getElementById('lightbox');
     lightbox.classList.add('hidden');
     lightbox.classList.remove('flex');
   }
-  document.getElementById('lightbox').addEventListener('click', (e) => {
+  document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.target === e.currentTarget) closeLightbox();
   });
 </script>

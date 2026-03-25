@@ -6,13 +6,13 @@ const works2d = await getCollection('2d').catch(() => []);
 ---
 <Layout>
   <main class="min-h-screen font-sans" style="background-color: #fce8ee;">
-    <div class="fixed left-0 top-0 h-full" style="width: 18px; background-color: #7dd3e8; z-index: 10;"></div>
-    <div style="padding-left: 18px;">
-      <header class="bg-white border-b py-6 px-8" style="border-color: #fbc8d8;">
+    <div class="fixed left-0 top-0 h-full" style="width: 32px; background-color: #7dd3e8; z-index: 5;"></div>
+    <div style="padding-left: 32px;">
+      <header class="bg-white border-b py-6 px-8" style="border-color: #fbc8d8; z-index: 10; position: relative;">
         <div class="max-w-5xl mx-auto flex items-center justify-between">
           <div class="text-center flex-1">
-            <h1 class="text-2xl font-bold tracking-[0.3em]" style="color: #2d3e6e;">PORTFOLIO</h1>
-            <p class="text-xs mt-1 tracking-widest" style="color: #7dd3e8;">works by yan</p>
+            <h1 class="text-3xl font-bold tracking-[0.3em]" style="color: #2d3e6e;">PORTFOLIO</h1>
+            <p class="text-sm mt-1 tracking-widest" style="color: #7dd3e8;">works by yan</p>
           </div>
           <div class="flex gap-4 items-center">
             <a href="https://x.com/McDonalds" target="_blank" rel="noopener" style="color: #2d3e6e;" class="hover:opacity-60 transition-opacity">
@@ -21,8 +21,9 @@ const works2d = await getCollection('2d').catch(() => []);
               </svg>
             </a>
             <a href="https://booth.pm" target="_blank" rel="noopener" style="color: #2d3e6e;" class="hover:opacity-60 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 75 75" fill="currentColor">
+                <path d="M10 10 h30 a15 15 0 0 1 0 30 h-30 z"/>
+                <path d="M10 40 h35 a17.5 17.5 0 0 1 0 35 h-35 z"/>
               </svg>
             </a>
           </div>

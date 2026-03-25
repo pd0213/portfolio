@@ -5,10 +5,10 @@ const works3d = await getCollection('3d').catch(() => []);
 const works2d = await getCollection('2d').catch(() => []);
 ---
 <Layout>
-  <main class="min-h-screen font-sans" style="background-color: #fce8ee; position: relative; z-index: 0;">
-    <div style="position: fixed; left: 0; top: 0; height: 100%; width: 32px; background-color: #7dd3e8; z-index: 0;"></div>
-    <div style="padding-left: 32px; position: relative; z-index: 1;">
-      <header class="bg-white border-b py-6 px-8" style="border-color: #fbc8d8; position: relative; z-index: 2; margin-left: 0;">
+  <main class="min-h-screen font-sans" style="background-color: #fce8ee;">
+    <header style="border-color: #fbc8d8; position: relative; display: flex; border-bottom: 1px solid #fbc8d8;">
+      <div style="width: 32px; flex-shrink: 0; background-color: #7dd3e8;"></div>
+      <div style="background-color: white; flex: 1; padding: 1.5rem 2rem;">
         <div class="max-w-5xl mx-auto flex items-center justify-between">
           <div class="text-center flex-1">
             <h1 class="text-3xl font-bold tracking-[0.3em]" style="color: #1a2e5e;">PORTFOLIO</h1>
@@ -28,62 +28,62 @@ const works2d = await getCollection('2d').catch(() => []);
             </a>
           </div>
         </div>
-      </header>
-      <div class="flex justify-center mt-10 gap-4">
-        <button id="tab-3d" onclick="switchTab('3d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #fbacc8; color: #2d3e6e;">
-          3D
-        </button>
-        <button id="tab-2d" onclick="switchTab('2d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #7dd3e8; color: #2d3e6e;">
-          2D
-        </button>
       </div>
-      <section id="gallery-3d" class="max-w-5xl mx-auto px-6 py-10">
-        {works3d.length === 0 ? (
-          <p class="text-center py-20" style="color: #fbacc8;">まだ作品がありません</p>
-        ) : (
-          <div class="grid grid-cols-3 gap-6">
-            {works3d.map((work) => (
-              <div class="flex flex-col gap-2">
-                <div class="relative group overflow-hidden rounded-xl cursor-pointer modal-trigger" data-type="video" data-src={work.data.video} data-title={work.data.title} data-desc={work.data.description} style="aspect-ratio: 2/3; background-color: #fce8ee;">
-                  <video src={work.data.video} autoplay loop muted playsinline class="w-full h-full object-cover" />
-                  <div class="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: rgba(0,0,0,0.45);">
-                    <p class="font-bold text-sm text-white">{work.data.title}</p>
-                    <p class="text-xs mt-1 line-clamp-2 text-white opacity-80">{work.data.description}</p>
-                  </div>
-                </div>
-                {work.data.images && work.data.images.length > 0 && (
-                  <div class="grid grid-cols-3 gap-1">
-                    {work.data.images.map((img, i) => (
-                      <div class="relative group overflow-hidden rounded-lg cursor-pointer modal-trigger" data-type="image" data-src={img} data-title={work.data.title} data-desc="" style="aspect-ratio: 1/1; background-color: #fce8ee;">
-                        <img src={img} alt={`wireframe-${i}`} class="w-full h-full object-cover" />
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: rgba(0,0,0,0.35);" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-      <section id="gallery-2d" class="max-w-5xl mx-auto px-6 py-10 hidden">
-        {works2d.length === 0 ? (
-          <p class="text-center py-20" style="color: #7dd3e8;">まだ作品がありません</p>
-        ) : (
-          <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            {works2d.map((work) => (
-              <div class="relative group overflow-hidden rounded-xl break-inside-avoid cursor-pointer modal-trigger" data-type="image" data-src={work.data.image} data-title={work.data.title} data-desc={work.data.description}>
-                <img src={work.data.image} alt={work.data.title} class="w-full object-cover" />
+    </header>
+    <div class="flex justify-center mt-10 gap-4">
+      <button id="tab-3d" onclick="switchTab('3d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #fbacc8; color: #2d3e6e;">
+        3D
+      </button>
+      <button id="tab-2d" onclick="switchTab('2d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #7dd3e8; color: #2d3e6e;">
+        2D
+      </button>
+    </div>
+    <section id="gallery-3d" class="max-w-5xl mx-auto px-6 py-10">
+      {works3d.length === 0 ? (
+        <p class="text-center py-20" style="color: #fbacc8;">まだ作品がありません</p>
+      ) : (
+        <div class="grid grid-cols-3 gap-6">
+          {works3d.map((work) => (
+            <div class="flex flex-col gap-2">
+              <div class="relative group overflow-hidden rounded-xl cursor-pointer modal-trigger" data-type="video" data-src={work.data.video} data-title={work.data.title} data-desc={work.data.description} style="aspect-ratio: 2/3; background-color: #fce8ee;">
+                <video src={work.data.video} autoplay loop muted playsinline class="w-full h-full object-cover" />
                 <div class="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: rgba(0,0,0,0.45);">
                   <p class="font-bold text-sm text-white">{work.data.title}</p>
                   <p class="text-xs mt-1 line-clamp-2 text-white opacity-80">{work.data.description}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </section>
-    </div>
+              {work.data.images && work.data.images.length > 0 && (
+                <div class="grid grid-cols-3 gap-1">
+                  {work.data.images.map((img, i) => (
+                    <div class="relative group overflow-hidden rounded-lg cursor-pointer modal-trigger" data-type="image" data-src={img} data-title={work.data.title} data-desc="" style="aspect-ratio: 1/1; background-color: #fce8ee;">
+                      <img src={img} alt={`wireframe-${i}`} class="w-full h-full object-cover" />
+                      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: rgba(0,0,0,0.35);" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+    <section id="gallery-2d" class="max-w-5xl mx-auto px-6 py-10 hidden">
+      {works2d.length === 0 ? (
+        <p class="text-center py-20" style="color: #7dd3e8;">まだ作品がありません</p>
+      ) : (
+        <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+          {works2d.map((work) => (
+            <div class="relative group overflow-hidden rounded-xl break-inside-avoid cursor-pointer modal-trigger" data-type="image" data-src={work.data.image} data-title={work.data.title} data-desc={work.data.description}>
+              <img src={work.data.image} alt={work.data.title} class="w-full object-cover" />
+              <div class="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: rgba(0,0,0,0.45);">
+                <p class="font-bold text-sm text-white">{work.data.title}</p>
+                <p class="text-xs mt-1 line-clamp-2 text-white opacity-80">{work.data.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
     <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 p-8" style="background: rgba(0,0,0,0.75);">
       <button onclick="closeModal()" class="absolute top-6 right-8 text-white text-4xl font-light leading-none z-10">&times;</button>
       <div id="modal-content" class="max-h-full" style="max-width: 480px; width: 100%;"></div>

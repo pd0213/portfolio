@@ -6,9 +6,9 @@ const works2d = await getCollection('2d').catch(() => []);
 ---
 <Layout>
   <main class="min-h-screen font-sans" style="background-color: #fce8ee;">
-    <div style="position: fixed; left: 0; top: 0; width: 80px; height: 100vh; background-color: #7dd3e8; z-index: 9999;"></div>
+    <div class="cyan-line" style="position: fixed; left: 0; top: 0; height: 100vh; background-color: #7dd3e8; z-index: 9999;"></div>
     <header style="border-color: #fbc8d8; position: relative; display: flex; border-bottom: 1px solid #fbc8d8;">
-      <div style="width: 80px; flex-shrink: 0; background-color: #7dd3e8;"></div>
+      <div class="cyan-line" style="flex-shrink: 0; background-color: #7dd3e8;"></div>
       <div style="background-color: white; flex: 1; padding: 1.5rem 2rem 1.5rem 2.5rem;">
         <div class="max-w-5xl mx-auto flex items-center justify-between">
           <div class="text-center flex-1">
@@ -31,6 +31,7 @@ const works2d = await getCollection('2d').catch(() => []);
         </div>
       </div>
     </header>
+    <div class="content-offset">
     <div class="flex justify-center mt-10 gap-4">
       <button id="tab-3d" onclick="switchTab('3d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #fbacc8; color: #2d3e6e;">
         3D
@@ -85,6 +86,7 @@ const works2d = await getCollection('2d').catch(() => []);
         </div>
       )}
     </section>
+    </div>
     <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 p-8" style="background: rgba(0,0,0,0.75);">
       <button onclick="closeModal()" class="absolute top-6 right-8 text-white text-4xl font-light leading-none z-10">&times;</button>
       <div id="modal-content" class="max-h-full" style="max-width: 480px; width: 100%;"></div>

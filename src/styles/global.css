@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+html, body {
+  background-color: #fce8ee;
+  min-height: 100%;
+}
+
+/* 水色ラインの幅：スマホは24px、PCは80px */
+.cyan-line {
+  width: 24px;
+}
+@media (min-width: 640px) {
+  .cyan-line {
+    width: 80px;
+  }
+}
+
+/* コンテンツのpadding-left：スマホは24px、PCは80px */
+.content-offset {
+  padding-left: 24px;
+}
+@media (min-width: 640px) {
+  .content-offset {
+    padding-left: 80px;
+  }
+}

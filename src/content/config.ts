@@ -1,6 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 const work3d = defineCollection({
-  type: 'data',
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -9,7 +8,6 @@ const work3d = defineCollection({
   }),
 });
 const work2d = defineCollection({
-  type: 'data',
   schema: z.object({
     title: z.string(),
     description: z.string(),

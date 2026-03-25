@@ -1,11 +1,141 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getCollection } from 'astro:content';
+const works3d = await getCollection('3d').catch(() => []);
+const works2d = await getCollection('2d').catch(() => []);
 ---
-
 <Layout>
-	<Welcome />
+  <main class="min-h-screen bg-pink-50 font-sans">
+    <!-- ヘッダー -->
+    <header class="bg-white border-b border-pink-100 py-8 text-center">
+      <h1 class="text-3xl font-bold tracking-widest text-pink-400">PORTFOLIO</h1>
+      <p class="text-sm text-cyan-400 mt-1 tracking-wider">works by pd0213</p>
+    </header>
+    <!-- タブ -->
+    <div class="flex justify-center mt-10 gap-4">
+      <button
+        id="tab-3d"
+        onclick="switchTab('3d')"
+        class="tab-btn px-8 py-2 rounded-full border-2 border-pink-300 text-pink-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-pink-400 hover:text-white"
+      >
+        3D
+      </button>
+      <button
+        id="tab-2d"
+        onclick="switchTab('2d')"
+        class="tab-btn px-8 py-2 rounded-full border-2 border-cyan-300 text-cyan-400 font-bold tracking-wider transition-all duration-200 bg-white hover:bg-cyan-400 hover:text-white"
+      >
+        2D
+      </button>
+    </div>
+    <!-- 3D作品ギャラリー -->
+    <section id="gallery-3d" class="max-w-5xl mx-auto px-6 py-10">
+      {works3d.length === 0 ? (
+        <p class="text-center text-pink-300 py-20">まだ作品がありません</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {works3d.map((work) => (
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+              <video
+                src={work.data.video}
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full aspect-video object-cover"
+              />
+              <div class="p-5">
+                <h2 class="text-lg font-bold text-gray-700 mb-2">{work.data.title}</h2>
+                <p class="text-sm text-gray-400 leading-relaxed">{work.data.description}</p>
+                {work.data.images && work.data.images.length > 0 && (
+                  <div class="mt-4 flex gap-2 flex-wrap">
+                    {work.data.images.map((img, i) => (
+                      <img
+                        src={img}
+                        alt={`wireframe-${i}`}
+                        class="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity lightbox-trigger"
+                        data-src={img}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+    <!-- 2Dイラストギャラリー -->
+    <section id="gallery-2d" class="max-w-5xl mx-auto px-6 py-10 hidden">
+      {works2d.length === 0 ? (
+        <p class="text-center text-cyan-300 py-20">まだ作品がありません</p>
+      ) : (
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {works2d.map((work) => (
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+              <img
+                src={work.data.image}
+                alt={work.data.title}
+                class="w-full aspect-square object-cover"
+              />
+              <div class="p-4">
+                <h2 class="text-base font-bold text-gray-700 mb-1">{work.data.title}</h2>
+                <p class="text-sm text-gray-400 leading-relaxed">{work.data.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+    <!-- ライトボックス -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+      <button onclick="closeLightbox()" class="absolute top-6 right-8 text-white text-4xl font-light">&times;</button>
+      <img id="lightbox-img" src="" alt="" class="max-w-3xl max-h-screen rounded-xl shadow-2xl p-4" />
+    </div>
+  </main>
 </Layout>
+<script>
+  // タブ切り替え
+  function switchTab(tab) {
+    const gallery3d = document.getElementById('gallery-3d');
+    const gallery2d = document.getElementById('gallery-2d');
+    const tab3d = document.getElementById('tab-3d');
+    const tab2d = document.getElementById('tab-2d');
+    if (tab === '3d') {
+      gallery3d.classList.remove('hidden');
+      gallery2d.classList.add('hidden');
+      tab3d.classList.add('bg-pink-400', 'text-white');
+      tab3d.classList.remove('bg-white', 'text-pink-400');
+      tab2d.classList.remove('bg-cyan-400', 'text-white');
+      tab2d.classList.add('bg-white', 'text-cyan-400');
+    } else {
+      gallery2d.classList.remove('hidden');
+      gallery3d.classList.add('hidden');
+      tab2d.classList.add('bg-cyan-400', 'text-white');
+      tab2d.classList.remove('bg-white', 'text-cyan-400');
+      tab3d.classList.remove('bg-pink-400', 'text-white');
+      tab3d.classList.add('bg-white', 'text-pink-400');
+    }
+  }
+  // 初期状態：3Dタブをアクティブに
+  switchTab('3d');
+  // ライトボックス
+  document.querySelectorAll('.lightbox-trigger').forEach(img => {
+    img.addEventListener('click', () => {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = img.dataset.src;
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+    });
+  });
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+  }
+  // ライトボックス外クリックで閉じる
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
+</script>

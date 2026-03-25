@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "public/uploads"
+public_folder: "/uploads"
+locale: ja
+collections:
+  - name: "3d"
+    label: "3D作品"
+    folder: "src/content/3d"
+    create: true
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "説明文", name: "description", widget: "text" }
+      - { label: "ターンテーブル動画", name: "video", widget: "file", allow_multiple: false, media_library: { config: { multiple: false } } }
+      - { label: "ワイヤーフレーム画像", name: "images", widget: "list", field: { label: "画像", name: "image", widget: "image" } }
+  - name: "2d"
+    label: "2Dイラスト"
+    folder: "src/content/2d"
+    create: true
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "説明文", name: "description", widget: "text" }
+      - { label: "イラスト画像", name: "image", widget: "image" }

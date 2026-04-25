@@ -1,24 +1,52 @@
 backend:
   name: git-gateway
   branch: main
+local_backend: true
+publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 locale: ja
 collections:
+  - name: "profile"
+    label: "プロフィール"
+    files:
+      - name: "profile"
+        label: "プロフィール"
+        file: "src/content/settings/profile.md"
+        fields:
+          - { label: "アイコン画像", name: "icon", widget: "image" }
+          - { label: "自己紹介文", name: "bio", widget: "text" }
+  - name: "links"
+    label: "リンク一覧"
+    files:
+      - name: "links"
+        label: "リンク一覧"
+        file: "src/content/settings/links.md"
+        fields:
+          - label: "リンク一覧"
+            name: "links"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "ラベル", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "アイコン画像", name: "icon", widget: "image" }
   - name: "3d"
-    label: "3D作品"
+    label: "3Dモデル"
     folder: "src/content/3d"
     create: true
     fields:
+      - { label: "表示順", name: "order", widget: "number", default: 99 }
       - { label: "タイトル", name: "title", widget: "string" }
       - { label: "説明文", name: "description", widget: "text" }
-      - { label: "ターンテーブル動画", name: "video", widget: "file", allow_multiple: false, media_library: { config: { multiple: false } } }
-      - { label: "ワイヤーフレーム画像", name: "images", widget: "list", field: { label: "画像", name: "image", widget: "image" } }
+      - { label: "動画", name: "video", widget: "file", allow_multiple: false, media_library: { config: { multiple: false } } }
+      - { label: "追加画像", name: "images", widget: "list", field: { label: "画像", name: "image", widget: "image" } }
   - name: "2d"
     label: "2Dイラスト"
     folder: "src/content/2d"
     create: true
     fields:
+      - { label: "表示順", name: "order", widget: "number", default: 99 }
       - { label: "タイトル", name: "title", widget: "string" }
       - { label: "説明文", name: "description", widget: "text" }
       - { label: "イラスト画像", name: "image", widget: "image" }

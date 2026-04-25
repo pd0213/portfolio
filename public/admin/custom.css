@@ -1,0 +1,10 @@
+/* アイコンプレビューを小さく */
+[class*="ImageWrapper"] {
+  max-width: 100px !important;
+  max-height: 100px !important;
+}
+[class*="StyledImage"] {
+  max-width: 100px !important;
+  max-height: 100px !important;
+  object-fit: contain !important;
+}

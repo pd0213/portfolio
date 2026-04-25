@@ -15,24 +15,38 @@ const works2d = await getCollection('2d').catch(() => []);
             <h1 style="font-size: 1.875rem; font-weight: bold; letter-spacing: 0.3em; color: #3a5faa;">PORTFOLIO</h1>
             <p class="text-sm mt-1 tracking-widest" style="color: #7dd3e8;">works by yan</p>
           </div>
-          <div class="flex gap-4 items-center">
-            <a href="https://x.com/McDonalds" target="_blank" rel="noopener" style="color: #2d3e6e;" class="hover:opacity-60 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a href="https://booth.pm" target="_blank" rel="noopener" style="color: #2d3e6e;" class="hover:opacity-60 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 75 75" fill="currentColor">
-                <path d="M10 10 h30 a15 15 0 0 1 0 30 h-30 z"/>
-                <path d="M10 40 h35 a17.5 17.5 0 0 1 0 35 h-35 z"/>
-              </svg>
-            </a>
-          </div>
         </div>
       </div>
     </header>
     <div class="content-offset">
-    <div class="flex justify-center mt-10 gap-4">
+
+    <!-- プロフィール欄 -->
+    <div class="flex items-center gap-5 px-6 pt-10 pb-6 mx-auto" style="width: fit-content;">
+      <!-- 左：円形アイコン -->
+      <div class="rounded-full overflow-hidden flex-shrink-0" style="width: 88px; height: 88px; border: 3px solid #fbacc8;">
+        <img src="/yanicon.png" alt="icon" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+      <!-- 右：自己紹介 ＋ リンク -->
+      <div class="flex flex-col justify-between gap-3">
+        <!-- 自己紹介 -->
+        <p class="text-sm leading-relaxed" style="color: #2d3e6e;">
+          自己紹介を入力してください
+        </p>
+        <!-- プラットフォームリンク -->
+        <div class="flex gap-4 items-center">
+          <a href="https://x.com/McDonalds" target="_blank" rel="noopener" class="hover:opacity-60 transition-opacity" style="color: #2d3e6e;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>
+            </svg>
+          </a>
+          <a href="https://booth.pm" target="_blank" rel="noopener" class="hover:opacity-60 transition-opacity">
+            <img src="/booth-icon.svg" width="22" height="22" alt="BOOTH" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-2 gap-4">
       <button id="tab-3d" onclick="switchTab('3d')" class="px-8 py-2 rounded-full border-2 font-bold tracking-wider transition-all duration-200 bg-white" style="border-color: #fbacc8; color: #2d3e6e;">
         3D
       </button>
